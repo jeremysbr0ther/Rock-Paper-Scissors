@@ -1,3 +1,8 @@
+// Oyuncu secimini yapmaya basladi
+// Oyuncu secim yaptikca bilgisayar da kendi secimlerini yapti
+// Karsilastirmalarla skor guncellendi, alert ile turu kimin kazandigi gosterilebilir
+
+
 // Get input from player
 // Find what is computer`s choice
 // Compare both and decide the winner
@@ -5,12 +10,23 @@
 // Break if someone get 3
 
 
-
 let playerScore = 0;
 let computerScore = 0;
+let playerSelection = 0;
+let computerChoice = 0;
+const rockPaperScissor = ['rock', 'paper', 'scissor']; // Gets computer`s choice.
 
+function getComputerChoice() {
+let choiceNumber = Math.floor(Math.random() * 3);
+computerChoice = rockPaperScissor[choiceNumber];
+}
 
-function playRound(playerSelection, computerChoice){
+function playRound(playerSelection, computerChoice) {
+
+    //console.log(playerSelection);
+    //console.log(computerChoice);
+    
+
     if (playerSelection === computerChoice) {
         result = 'Lets call it draw.';
         return result;
@@ -45,40 +61,29 @@ function playRound(playerSelection, computerChoice){
         playerScore++;
         return result;
     }
+console.log('1');
+    console.log(result);
+
+    console.log(playerScore);
+    console.log(computerScore);
 }
 
 
-function game() {
 
-    for (let i = 0; i < 5; i++) {
-        let playerSelection = prompt('Plese enter one of the following; Rock-Paper-Scissor: ');
-        playerSelection = playerSelection.toLowerCase();
-        console.log(playerSelection);
 
-        const rockPaperScissor = ['rock', 'paper', 'scissor'];
-        function getComputerChoise(){
-        let choiceNumber = Math.floor(Math.random() * 3);
-        computerChoice = rockPaperScissor[choiceNumber];
-        }
-        getComputerChoise();
-        console.log(computerChoice);
-        playRound(playerSelection, computerChoice);
-        console.log(result);
-    }
+const rockBtn = document.getElementById('rockBtn');
+const paperBtn = document.getElementById('paperBtn');
+const scissorBtn = document.getElementById('scissorBtn');
 
-    if (playerScore === computerScore) {
-        result = 'Nobody wins, it is a draw game.'
-        return result;
-    }
-    else if (playerScore > computerScore){
-        result = 'Congrats, You win the game!';
-        return result;
-    }
-    else {
-        result = 'Sorry, You lost the game.'
-        return result;
-    }
-}
-
-game();
-console.log(result);
+rockBtn.addEventListener('click', function() {
+    getComputerChoice();
+    playRound('rock', computerChoice)
+});
+paperBtn.addEventListener('click', function() {
+    getComputerChoice();
+    playRound('paper', computerChoice)
+});
+scissorBtn.addEventListener('click', function() {
+    getComputerChoice();
+    playRound('scissor', computerChoice)
+});
