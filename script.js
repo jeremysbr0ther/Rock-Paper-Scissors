@@ -64,6 +64,12 @@ function playRound(playerSelection, computerChoice) {
         }
     }
 
+    screen.textContent = result;
+    playerScoreDiv.textContent = playerScore;
+    playerSelectionDiv.textContent = playerSelection;
+    computerScoreDiv.textContent = computerScore;
+    computerChoiceDiv.textContent = computerChoice;
+
     console.log(playerSelection);
     console.log(computerChoice);
 
@@ -75,20 +81,50 @@ function playRound(playerSelection, computerChoice) {
 
 
 
+const rockBtn = document.createElement('button');
+rockBtn.setAttribute('id', 'rockBtn');
+rockBtn.textContent = 'Rock';
+const paperBtn = document.createElement('button');
+paperBtn.setAttribute('id', 'paperBtn');
+paperBtn.textContent = 'Paper';
+const scissorBtn = document.createElement('button');
+scissorBtn.setAttribute('id', 'scissorBtn');
+scissorBtn.textContent = 'Scissor';
 
-const rockBtn = document.getElementById('rockBtn');
-const paperBtn = document.getElementById('paperBtn');
-const scissorBtn = document.getElementById('scissorBtn');
+const buttons = document.createElement('div');
+buttons.setAttribute('id', 'buttons');
+buttons.appendChild(rockBtn);
+buttons.appendChild(paperBtn);
+buttons.appendChild(scissorBtn);
+
+const screen = document.createElement('div');
+screen.setAttribute('id', 'screen');
+screen.style.alignSelf = 'center';
+screen.style.marginTop = '20px';
+
+const outerContainer = document.querySelector('#outerContainer');
+const playBtn = document.getElementById('playBtn');
+playBtn.addEventListener('click', () => { 
+    playBtn.style.display = 'none';
+    outerContainer.appendChild(screen);
+    outerContainer.appendChild(buttons);
+})
+
+const playerScoreDiv = document.getElementById('playerScore');
+const playerSelectionDiv = document.getElementById('playerSelection');
+const computerScoreDiv = document.getElementById('computerScore');
+const computerChoiceDiv = document.getElementById('computerChoice');
 
 rockBtn.addEventListener('click', function() {
     getComputerChoice();
-    playRound('rock', computerChoice)
+    playRound('rock', computerChoice);
 });
 paperBtn.addEventListener('click', function() {
     getComputerChoice();
-    playRound('paper', computerChoice)
+    playRound('paper', computerChoice);
 });
 scissorBtn.addEventListener('click', function() {
     getComputerChoice();
-    playRound('scissor', computerChoice)
+    playRound('scissor', computerChoice);
 });
+
