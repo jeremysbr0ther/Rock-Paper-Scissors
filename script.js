@@ -1,21 +1,9 @@
-// Oyuncu secimini yapmaya basladi
-// Oyuncu secim yaptikca bilgisayar da kendi secimlerini yapti
-// Karsilastirmalarla skor guncellendi, alert ile turu kimin kazandigi gosterilebilir
-
-
-// Get input from player
-// Find what is computer`s choice
-// Compare both and decide the winner
-// Then create a loop for 5 rounds
-// Break if someone get 3
-
-
 let playerScore = 0;
 let computerScore = 0;
 let playerSelection = 0;
 let computerChoice = 0;
 let result = 0;
-const rockPaperScissor = ['rock', 'paper', 'scissor']; // Gets computer`s choice.
+const rockPaperScissor = ['rock', 'paper', 'scissor'];
 
 function getComputerChoice() {
 let choiceNumber = Math.floor(Math.random() * 3);
@@ -25,7 +13,6 @@ computerChoice = rockPaperScissor[choiceNumber];
 function playRound(playerSelection, computerChoice) {
     
     let trial = playerSelection + computerChoice;
-    console.log(trial);
 
     if (trial === 'rockscissor') {
         result = 'You win this round! Rock beats scissor.';
@@ -62,13 +49,15 @@ function playRound(playerSelection, computerChoice) {
         else if (computerScore > playerScore) {
             result = 'Computer win the game!';
         }
+
+        endGame();
     }
 
-    screen.textContent = result;
+    screenDiv.textContent = result;
     playerScoreDiv.textContent = playerScore;
-    playerSelectionDiv.textContent = playerSelection;
+    playerSelectionDiv.textContent = playerSelection.toUpperCase();
     computerScoreDiv.textContent = computerScore;
-    computerChoiceDiv.textContent = computerChoice;
+    computerChoiceDiv.textContent = computerChoice.toUpperCase();
 
     console.log(playerSelection);
     console.log(computerChoice);
@@ -97,16 +86,16 @@ buttons.appendChild(rockBtn);
 buttons.appendChild(paperBtn);
 buttons.appendChild(scissorBtn);
 
-const screen = document.createElement('div');
-screen.setAttribute('id', 'screen');
-screen.style.alignSelf = 'center';
-screen.style.marginTop = '20px';
+const screenDiv = document.createElement('div');
+screenDiv.setAttribute('id', 'screenDiv');
+screenDiv.style.alignSelf = 'center';
+screenDiv.style.marginTop = '20px';
 
 const outerContainer = document.querySelector('#outerContainer');
 const playBtn = document.getElementById('playBtn');
 playBtn.addEventListener('click', () => { 
     playBtn.style.display = 'none';
-    outerContainer.appendChild(screen);
+    outerContainer.appendChild(screenDiv);
     outerContainer.appendChild(buttons);
 })
 
@@ -128,3 +117,31 @@ scissorBtn.addEventListener('click', function() {
     playRound('scissor', computerChoice);
 });
 
+const playAgainBtn = document.createElement('button');
+playAgainBtn.setAttribute('id', playAgainBtn);
+playAgainBtn.textContent = 'Play Again';
+playAgainBtn.style.width = '60px';
+playAgainBtn.style.alignSelf = 'center';
+
+playAgainBtn.addEventListener('click', () => {
+    playAgainBtn.style.display = 'none';
+    rockBtn.style.display = 'block';
+    paperBtn.style.display = 'block';
+    scissorBtn.style.display = 'block';
+    playerScore = 0;
+    computerScore = 0;
+    playerScoreDiv.textContent = 0;
+    computerScoreDiv.textContent = 0;
+    playerSelectionDiv.textContent = '';
+    computerChoiceDiv.textContent = '';
+    screenDiv.textContent = '';
+})
+
+
+function endGame() {
+    rockBtn.style.display = 'none';
+    paperBtn.style.display = 'none';
+    scissorBtn.style.display = 'none';
+    playAgainBtn.style.display = 'block';
+    outerContainer.appendChild(playAgainBtn);
+}
